@@ -2,6 +2,14 @@
 
 This repository provides a PowerShell-based automation framework to import an Intune **App Protection** baseline using JSON templates. The framework is designed to be **repeatable** (safe to re-run) by applying **duplicate detection** based on policy `displayName` before creating new objects.
 
+## Background and origin
+
+Microsoft has published guidance and a recommended **data protection framework** for Intune app protection policies (APP), including the concept of importing **sample JSON templates** for the configuration framework using PowerShell scripts. This repository packages the framework in a customer-ready form and provides an updated automation approach for environments where the original sample distribution method is no longer practical for direct, ready-to-use downloads.
+
+Historically, some Microsoft and community scripts for Intune/Entra automation relied on the legacy **AzureAD** / **AzureADPreview** PowerShell modules. Microsoft has since announced the retirement of these modules and recommends migrating scripts to the **Microsoft Graph PowerShell SDK** (or Microsoft Entra PowerShell) to avoid disruption.
+
+Operationally, the legacy AzureAD/AzureADPreview modules have also been associated with PowerShell compatibility and assembly-loading issues in some contexts (for example, PowerShell 7 / Function Apps), which often led customers to pin module versions or use Windows PowerShell compatibility modes. This framework therefore standardizes on the Microsoft Graph PowerShell module as the supported and forward-looking approach.
+
 ## What this framework imports
 
 When executed end-to-end, the framework imports the following Intune artifacts:
@@ -45,10 +53,16 @@ The scope tag assignment script intentionally **excludes** policies with the pre
 - Microsoft Graph PowerShell SDK installed (the scripts validate the module presence).
 - An account that can consent to and use the required Graph permissions.
 
+## Microsoft documentation references
+
+The following Microsoft sources provide the conceptual and operational context for this framework:
+
+- **Data protection framework using app protection policies** (taxonomy and guidance; references importing sample JSON templates using PowerShell)
+- **Create and deploy app protection policies** (how APPs are created and assigned; links back to the framework)
+- **App protection policy settings for iOS/iPadOS** (settings reference used when reviewing the JSON templates)
+- **AzureAD PowerShell retirement and migration guidance** (Microsoft direction to migrate legacy AzureAD/AzureADPreview scripts)
+- **Microsoft Graph PowerShell SDK guidance** (Microsoft statement that Azure AD module is being replaced by Graph PowerShell)
+
 ## Support statement
 
 This framework uses Microsoft Graph calls to create Intune policy objects from JSON. Always validate the resulting policies and assignments in the Intune admin center before rolling out broadly.
-
-
-
-
