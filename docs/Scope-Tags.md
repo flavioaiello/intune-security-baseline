@@ -42,5 +42,7 @@ If your organization uses a different scope tag name than `EUD`, update the scri
 
 ## Safe execution options
 
-To simulate changes without applying them, use:
+To simulate changes without applying them, use: .\AssignEUDScopeTag.ps1 -WhatIf
+
+To apply changes, run: .\AssignEUDScopeTag.ps1
 
